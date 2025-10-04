@@ -7,14 +7,12 @@ data = json.load(open("network-devices.json","r",encoding = "utf-8"))
 # create an empty variable that will hold report text
 report = ""
 
-# Display company name + last update
+for name in data["company"]:
+    report += name
 
-company = ""
-updated = ""
-company += "company\n"
-updated += "date\n"
+for date in data["last_updated"]:
+    report += date
 
-report = company + updated
 
 # loop through location list
 for location in data["locations"]:
@@ -23,6 +21,13 @@ for location in data["locations"]:
     # include device host names from each location in report
     for device in location["devices"]:
         report += " " + device["hostname"] + "\n"
+
+# for company in data["company"]:
+#     report += "\n" + company[""] + "\n"
+
+
+# for last_update in data["last_update"]:
+#     report += " " + last_update + " "
 
 
 # write data into a text file

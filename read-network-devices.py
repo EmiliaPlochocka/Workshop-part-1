@@ -21,21 +21,11 @@ for location in data["locations"]:
                      + str(device["uptime_days"]).rjust(4) + "\n"
                      )
 
-# loop through devices with offline status
+# loop through devices with offline or warning status
 report += "\n" + "Devices with 'offline' or 'warning' status:\n"
 for location in data["locations"]:
     for device in location["devices"]:
-        if device["status"] == "offline":
-            report += "\n" + location["site"] + "\n"
-            report += (" "
-                     + device["hostname"].ljust(15,' ') + ' '
-                     + (device["status"]).rjust(4) + "\n"
-                     )
-            
-# loop through devices with warning status
-for location in data["locations"]:
-    for device in location["devices"]:
-        if device["status"] == "warning":
+        if device["status"] == "offline" or device["status"] == "warning":
             report += "\n" + location["site"] + "\n"
             report += (" "
                      + device["hostname"].ljust(15,' ') + ' '

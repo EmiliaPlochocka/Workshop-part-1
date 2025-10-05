@@ -1,21 +1,41 @@
-Summary:
-This is our basic report:
-TechCorp AB2024-09-30T10:30:00
+Networking report for:
+TechCorp AB
+2024-09-30T10:30:00
+
+Devices with less than 30 days of uptime:
+
 Huvudkontor
- SW-ACCESS-03    offline            0
- SW-ACCESS-05    online            15
- AP-FLOOR2-01    online            12
- AP-FLOOR2-02    warning            2
+ SW-ACCESS-03    Uptime days:       0
+ SW-ACCESS-05    Uptime days:      15
+ AP-FLOOR2-01    Uptime days:      12
+ AP-FLOOR2-02    Uptime days:       2
 
 Lager
- SW-LAGER-02     online            23
- RT-LAGER-01     warning            2
- AP-LAGER-02     offline            0
+ SW-LAGER-02     Uptime days:      23
+ RT-LAGER-01     Uptime days:       2
+ AP-LAGER-02     Uptime days:       0
 
 Kontor Malmö
- SW-MAL-ACC-02   online             8
+ SW-MAL-ACC-02   Uptime days:       8
 
 Datacenter
- SW-DC-TOR-02    warning            5
+ SW-DC-TOR-02    Uptime days:       5
 
 Säkerhetskopia
+
+Devices with 'offline' or 'warning' status:
+
+Huvudkontor
+ SW-ACCESS-03    offline
+
+Lager
+ AP-LAGER-02     offline
+
+Huvudkontor
+ AP-FLOOR2-02    warning
+
+Lager
+ RT-LAGER-01     warning
+
+Datacenter
+ SW-DC-TOR-02    warning

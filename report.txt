@@ -47,3 +47,6 @@ number of routers: 6
 number of switcaccess points: 9
 number of firewalls: 5
 number of load balancers: 2
+
+total port utilization:
+541 of 676 ports in use = 80.02958579881657%

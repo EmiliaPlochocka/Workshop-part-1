@@ -79,7 +79,21 @@ report += "number of switcaccess points:" + " " + str(count_access_point) + "\n"
 report += "number of firewalls:" + " " + str(count_firewall) + "\n"
 report += "number of load balancers:" + " " + str(count_load_balancer) + "\n"
 
+#___PORT UTILIZATION___
+# I give up.
+# number of total ports in devices: 676
+# number of used ports: 541
 
+n1 = int(676)
+n2 = int(541)
+
+division = n2 / n1
+
+percentage = (division) * 100
+print(percentage)
+
+report += "\n" + "total port utilization:" + '\n'
+report += "541 of 676 ports in use = " + str(percentage) + "%"
 #___write data into a text file___
 with open('report.txt', 'w', encoding='utf-8') as f:
     f.write(report)

@@ -27,7 +27,6 @@ report += "\n" + "Devices with less than 30 days of uptime:\n"
 for location in data["locations"]:
     # include site name in report
     report += "\n" + location["site"] + "\n"
-    # include devices in report
     for device in location["devices"]:
         if device["uptime_days"] <30:
             report += (" "
@@ -35,6 +34,7 @@ for location in data["locations"]:
                      + "Uptime days:".ljust(15) + ' '
                      + str(device["uptime_days"]).rjust(4) + "\n"
                      )
+
 
 #___STATUS___
 # loop through devices with offline or warning status
@@ -47,6 +47,7 @@ for location in data["locations"]:
                      + device["hostname"].ljust(15,' ') + ' '
                      + (device["status"]).rjust(4) + "\n"
                      )
+
 #___COUNT DEVICES___
 # create new dictionary and add start values
 counts = {}
@@ -83,17 +84,17 @@ report += "number of load balancers:" + " " + str(count_load_balancer) + "\n"
 # I give up.
 # number of total ports in devices: 676
 # number of used ports: 541
+# total = int()
 
 n1 = int(676)
 n2 = int(541)
 
 division = n2 / n1
-
 percentage = (division) * 100
-print(percentage)
 
 report += "\n" + "total port utilization:" + '\n'
 report += "541 of 676 ports in use = " + str(percentage) + "%"
+
 #___write data into a text file___
 with open('report.txt', 'w', encoding='utf-8') as f:
     f.write(report)

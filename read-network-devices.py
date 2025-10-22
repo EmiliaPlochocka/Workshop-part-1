@@ -84,22 +84,43 @@ report += "number of firewalls:" + " " + str(count_firewall) + "\n"
 report += "number of load balancers:" + " " + str(count_load_balancer) + "\n"
 
 #___PORT UTILIZATION___
-# I give up.
-# number of total ports in devices: 676
-# number of used ports: 541
-n1 = int(676)
-n2 = int(541)
+total_ports = 0
+used_ports = 0
+for loc in data.get("locations", []):
+    for dev in loc.get("devices", []):
+        ports = dev.get("ports")
+        if ports and isinstance(ports, dict):
+            try:
+                total = int(ports.get("total", 0))
+                used = int(ports.get("used", 0))
+            except (ValueError, TypeError):
+                total = 0
+                used = 0
+            total_ports += total
+            used_ports += used
+if total_ports > 0:
+    percentage = used_ports / total_ports * 100
+else:
+    percentage = 0.0
 
-division = n2 / n1
-percentage = (division) * 100
-
-report += "\n" + "total port utilization:" + '\n'
-report += "541 of 676 ports in use = " + str(percentage) + "%"
+report += "\nTotal port utilization:\n"
+report += f"{used_ports} of {total_ports} ports in use = {percentage:.1f}%\n"
 
 #__UNIQUE VLANS__
 vlans = set()
-vlans.update()
-
+for loc in data.get("locations", []):
+    for dev in loc.get("devices", []):
+        for v in dev.get("vlans", []):
+            try:
+                vlans.add(int(v))
+            except (ValueError, TypeError):
+                continue
+sorted_vlans = sorted(vlans)
+report += "\nUnique VLANs in network:\n"
+if sorted_vlans:
+    report += ", ".join(str(v) for v in sorted_vlans) + "/n"
+else:
+    report += "None found\n"
 #___write data into a text file___
 with open('report.txt', 'w', encoding='utf-8') as f:
     f.write(report)

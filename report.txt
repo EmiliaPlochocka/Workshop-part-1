@@ -28,14 +28,10 @@ Devices with 'offline' or 'warning' status:
 
 Huvudkontor
  SW-ACCESS-03    offline
-
-Huvudkontor
  AP-FLOOR2-02    warning
 
 Lager
  RT-LAGER-01     warning
-
-Lager
  AP-LAGER-02     offline
 
 Datacenter

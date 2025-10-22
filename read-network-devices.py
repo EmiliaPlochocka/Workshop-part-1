@@ -9,7 +9,7 @@ report = ""
 
 # ___HEADER___
 header = "Networking report for:\n"
-# fetch data "company" from data(from json file)
+# fetch data "company" from data(from json file) uding data.get
 header += data.get("company") + "\n"
 # fetch "last_updated" from data, add a double line at the end for clarity
 header += "data update:" + data.get("last_updated", "") +"\n\n"
@@ -17,30 +17,39 @@ header += "data update:" + data.get("last_updated", "") +"\n\n"
 report = header + report
 
 #___LOW UPTIME___
-# loop through devices with uptime of less than 30 days
 report += "\n" + "Devices with less than 30 days of uptime:\n"
-for location in data["locations"]:
-    # include site name in report
-    report += "\n" + location["site"] + "\n"
-    for device in location["devices"]:
-        if device["uptime_days"] <30:
-            report += (" "
-                     + device["hostname"].ljust(15,' ') + ' '
-                     + "Uptime days:".ljust(15) + ' '
-                     + str(device["uptime_days"]).rjust(4) + "\n"
+for location in data.get("locations", []):
+    # f" - format selected part of string
+    report += f"\n{location.get('site')}\n"
+    for device in location.get("devices", []):
+        # create a value containing data about uptime
+        uptime = device.get("uptime_days")
+        try:
+            if uptime is not None and int(uptime) <30:
+                report += (
+                    " " + device.get("hostname", "").ljust(15) + " "
+                    + "Uptime days:".ljust(15) + " "
+                    + str(int(uptime)).rjust(4) + "\n"
                      )
+        except (ValueError, TypeError):
+            continue
 
-#___STATUS___
+#___WARNING/OFFLINE STATUS___
 # loop through devices with offline or warning status
-report += "\n" + "Devices with 'offline' or 'warning' status:\n"
-for location in data["locations"]:
-    for device in location["devices"]:
-        if device["status"] == "offline" or device["status"] == "warning":
-            report += "\n" + location["site"] + "\n"
-            report += (" "
-                     + device["hostname"].ljust(15,' ') + ' '
-                     + (device["status"]).rjust(4) + "\n"
-                     )
+report += "\nDevices with 'offline' or 'warning' status:\n"
+for location in data.get("locations", []):
+    site = location.get("site")
+    problems = [d for d in location.get("devices", [])
+            if d.get("status") in ("offline" "warning")]
+    if not problems:
+        continue
+    report += f"\n{site}\n"
+    for device in problems:
+            status = device.get("status", "")
+            report += (
+                " " + device.get("hostname", "").ljust(15) + " "
+                 + status.ljust(7) + "\n"
+            )
 
 #___COUNT DEVICES___
 # create new dictionary and add start values

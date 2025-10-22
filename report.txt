@@ -1,6 +1,7 @@
 Networking report for:
 TechCorp AB
-2024-09-30T10:30:00
+data update:2024-09-30T10:30:00
+
 
 Devices with less than 30 days of uptime:
 

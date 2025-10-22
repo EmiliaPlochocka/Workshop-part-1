@@ -8,16 +8,11 @@ data = json.load(open("network-devices.json","r",encoding = "utf-8"))
 report = ""
 
 # ___HEADER___
-# create an empty header
-header = ""
-header += "Networking report for:\n"
-# include company name and date of last update in header
-for name in data["company"]:
-    header += name
-header += "\n"
-for date in data["last_updated"]:
-    header += date
-header += "\n"
+header = "Networking report for:\n"
+# fetch data "company" from data(from json file)
+header += data.get("company") + "\n"
+# fetch "last_updated" from data, add a double line at the end for clarity
+header += "data update:" + data.get("last_updated", "") +"\n\n"
 # add header before main report
 report = header + report
 
@@ -34,7 +29,6 @@ for location in data["locations"]:
                      + "Uptime days:".ljust(15) + ' '
                      + str(device["uptime_days"]).rjust(4) + "\n"
                      )
-
 
 #___STATUS___
 # loop through devices with offline or warning status
@@ -84,8 +78,6 @@ report += "number of load balancers:" + " " + str(count_load_balancer) + "\n"
 # I give up.
 # number of total ports in devices: 676
 # number of used ports: 541
-# total = int()
-
 n1 = int(676)
 n2 = int(541)
 
@@ -94,6 +86,10 @@ percentage = (division) * 100
 
 report += "\n" + "total port utilization:" + '\n'
 report += "541 of 676 ports in use = " + str(percentage) + "%"
+
+#__UNIQUE VLANS__
+vlans = set()
+vlans.update()
 
 #___write data into a text file___
 with open('report.txt', 'w', encoding='utf-8') as f:

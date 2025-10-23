@@ -50,3 +50,34 @@ Total port utilization:
 
 Unique VLANs in network:
 10, 20, 30, 40, 50, 100, 110, 120, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 2100/n
+Overview per location:
+
+Huvudkontor
+ Total devices: 15
+ Online: 13
+ Offline: 1
+ Warning: 1
+
+Lager
+ Total devices: 5
+ Online: 3
+ Offline: 1
+ Warning: 1
+
+Kontor Malmö
+ Total devices: 7
+ Online: 7
+ Offline: 0
+ Warning: 0
+
+Datacenter
+ Total devices: 10
+ Online: 9
+ Offline: 0
+ Warning: 1
+
+Säkerhetskopia
+ Total devices: 3
+ Online: 3
+ Offline: 0
+ Warning: 0
